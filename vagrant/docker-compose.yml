@@ -1,0 +1,34 @@
+version: '3.3'
+services:
+  remediate:
+    image: "${REGISTRY:-gcr.io}/puppet-discovery/remediate:1.3.0@sha256:6d36bdb8d85b6745c7b398188c918bb5429872d00cba658141c6d7e47d432b4f"
+    environment:
+      - REGISTRY=${REGISTRY:-gcr.io}
+      - LIBRARY_REGISTRY=${REGISTRY:-library}
+      - CONTROLLER_TAG=1.3.0@sha256:1e94e5ecb2532ee18100f3a96ae9c260789760a0ba9df85ed5b388838949d6eb
+      - DASHBOARD_TAG=1.3.0@sha256:c21c7f71481f72e5778400760789bf80202b8c59b206ac79e259eaf48af2b5d7
+      - EDGE_TAG=1.3.0@sha256:1360a3872c4f248dd5c4a9383ccb0148d404b053acbc0ab197ea509ebcb7af41
+      - EXPORT_TAG=1.3.0@sha256:abc2d60536523520feb5ddea25374c34275f316c92e45fe6c233691b151dc5b8
+      - FRONTDOOR_TAG=1.3.0@sha256:5637eb7764555d4763b83f2c53909924ecab50c291a57d9903ca4358e8998dfb
+      - IDENTITY_TAG=1.3.0@sha256:756be9dc4e0102d42d186d0db835eb5509ab04354fa9f3797085871ed9e1e5a9
+      - LAZERDISK_TAG=1.3.0@sha256:cb2beb4a838fd122a11589be189f684fcddc0d240f49d5d24ae5eb752de8cfd0
+      - LICENSING_TAG=1.3.0@sha256:f649230fd8fd69da9c797d97435bd947403096555756b3e1cec0c3c3e5ffe497
+      - MONITORING_TAG=1.3.0@sha256:c9478bc7bd525dd68fd5ec991ee80c0e3276f832db4763d9cb9985b5f414bb2f
+      - E2E_TAG=1.3.0@sha256:7356c9ac785a8a9181679486c503b679ba3826d125c62102c5cb1a27a036241c
+      - PDP_TAG=1.3.0@sha256:68aba5509af53cc5c9a5b47ae8a22adfcd5c9a3385969023fd8181393d47b6b7
+      - STORAGE_TAG=1.3.0@sha256:6c1dfe6fe64ad5849a9a0c6a3014815c64a167daf700ef7f2b4d09eec0cd2922
+      - UI_TAG=1.3.0@sha256:9c401fd0d0ec234267be419ff075504c267f76802f3b5ee12cc7abb2baa5e5d1
+      - VR_TAG=1.3.0@sha256:b1e089d554f085fb9f7fb4707481b7b0190a03db0989c646bca141d9bf21dd19
+      - AUDIT_TAG=1.3.0@sha256:2c9f75dca85f94fdf4dacab9bed642c5e46bf02243bc5005d2dddc4f952a8a47
+      - VERSION=1.3.0
+      - BUILD=5b4392c
+      - RELEASE_CHANNEL=stable/1.3.0
+      - PWD=/pwd
+    volumes:
+      - bootstrap_data:/data
+      - ./:/pwd
+      - //var/run/docker.sock://var/run/docker.sock
+    network_mode: "host"
+volumes:
+  bootstrap_data:
+    external: false
