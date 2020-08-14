@@ -9,7 +9,6 @@ Vagrant.configure("2") do |config|
   # Machine name
   config.vm.hostname = 'remediate'
 
-  # To resolve later 11/08/2020
   # vagrant plugin install vagrant-disksize -> To define the size of the disk
   # config.disksize.size = '20GB'
 
@@ -39,7 +38,7 @@ Vagrant.configure("2") do |config|
     rm /home/vagrant/.ssh/public_notebook_key -rf
     sudo echo "nameserver 8.8.8.8" > /etc/resolv.conf
     sudo setenforce permissive
-    #sudo yum -y update
+    sudo yum -y update
     sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
     sudo yum -y install docker-ce docker-ce-cli containerd.io
     sudo systemctl enable docker
@@ -48,9 +47,9 @@ Vagrant.configure("2") do |config|
     sudo chmod +x /usr/local/bin/docker-compose
 
     # Initialize the swarm
-    sudo docker swarm init
+    sudo docker swarm init --advertise-addr 192.168.167.173
 
     # Bring up the remediate stack, access by http://IP-VM:8443 user: admin pass: @Admin
-    sudo docker-compose run remediate start --license-file License-puppet-remediate-trial.json
+    sudo /usr/local/bin/docker-compose run remediate start --license-file License-puppet-remediate-trial.json
   SHELL
 end
