@@ -1,2 +1,3 @@
-# puppet_remediate
-Lab with Puppet Remediate
+# Puppet Remediate
+
+A lab with Puppet Remediate
